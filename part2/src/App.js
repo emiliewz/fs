@@ -7,16 +7,17 @@ const App = () => {
   const [newNote, setNewNote] = useState('')
   const [showAll, setShowAll] = useState(true)
 
-  const hook = () => {
+  useEffect(() => {
     console.log('effect')
-    axios
-      .get('http://localhost:3001/notes')
-      .then(response => {
-        console.log('promise fulfilled')
-        setNotes(response.data)
-      })
-  }
-  useEffect(hook, [])
+
+    const eventHandler = response => {
+      console.log(response)
+      setNotes(response.data)
+    }
+
+    const promise = axios.get('http://localhost:3001/notes')
+    promise.then(eventHandler)
+  }, [])
 
   console.log('render', notes.length, 'notes')
 
