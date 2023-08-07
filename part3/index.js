@@ -1,8 +1,17 @@
 const express = require('express')
+
 const app = express()
 
 app.use(express.json())
 
+const requestLogger = (request, response, next) => {
+  console.log(('Methdo:', request.method))
+  console.log('Path:   ', request.path)
+  console.log('Body:   ', request.body)
+  console.log('---')
+  next()
+}
+app.use(requestLogger)
 
 let notes = [
   {
@@ -50,7 +59,7 @@ app.delete('/api/notes/:id', (request, response) => {
 
 const generateId = () => {
   const maxId = notes.length > 0
-    ? Math.max(notes.map(n => n.id))
+    ? Math.max(...notes.map(n => n.id))
     : 0
   return maxId + 1
 }
