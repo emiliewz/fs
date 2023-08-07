@@ -1,17 +1,13 @@
 const express = require('express')
-
 const app = express()
-
 app.use(express.json())
 
-const requestLogger = (request, response, next) => {
-  console.log(('Methdo:', request.method))
-  console.log('Path:   ', request.path)
-  console.log('Body:   ', request.body)
-  console.log('---')
-  next()
-}
-app.use(requestLogger)
+const morgan = require('morgan')
+morgan.token('body', function (req, res) { return JSON.stringify(req.body) })
+app.use(morgan(':method :url :status :res[content-length] - :response-time ms :body'))
+
+const cors = require('cors')
+app.use(cors())
 
 let notes = [
   {
@@ -84,7 +80,7 @@ app.post('/api/notes', (request, response) => {
   response.json(note)
 })
 
-const PORT = 3001
+const PORT = process.env.PORT || 3001
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`)
 })
