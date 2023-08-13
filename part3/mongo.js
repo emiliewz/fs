@@ -19,7 +19,7 @@ const noteSchema = new mongoose.Schema({
 
 const Note = mongoose.model('Note', noteSchema)
 
-Note.find({}).select("-_id -__v").then(result => {
+Note.find({}).select('-_id -__v').then(result => {
   result.forEach(note => {
     console.log(note)
   })
