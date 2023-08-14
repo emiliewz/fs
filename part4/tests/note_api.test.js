@@ -9,11 +9,18 @@ const Note = require('../models/note')
 beforeEach(async () => {
   await Note.deleteMany({})
 
-  let noteObject = new Note(helper.initialNotes[0])
-  await noteObject.save()
+  // promise.all executes the promises it receives in parallel
+  const noteObjects = helper.initialNotes
+    .map(note => new Note(note))
+  const promiseArray = noteObjects.map(note => note.save())
+  await Promise.all(promiseArray)
 
-  noteObject = new Note(helper.initialNotes[1])
-  await noteObject.save()
+  // // execute inside of a for...of block, to guarantee a specific execution order
+  // // if the promise need to be executed in a particular order
+  // for (let note of helper.initialNotes) {
+  //   let noteObject = new Note(note)
+  //   await noteObject.save()
+  // }
 })
 
 test('notes are returned as json', async () => {
@@ -21,7 +28,7 @@ test('notes are returned as json', async () => {
     .get('/api/notes')
     .expect(200)
     .expect('Content-Type', /application\/json/)
-})
+}, 100000)
 
 test('all notes are returned', async () => {
   const response = await api.get('/api/notes')
