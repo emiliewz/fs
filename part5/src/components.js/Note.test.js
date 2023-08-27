@@ -27,7 +27,7 @@ test.only('renders content', () => {
 
   render(<Note note={note} />)
 
-  const element = screen.getByText('Does not work anymore :(', { exact: false })
+  const element = screen.findByText('Does not work anymore :(')
 
   expect(element).toBeDefined()
 })
