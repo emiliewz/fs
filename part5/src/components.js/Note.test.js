@@ -12,14 +12,13 @@ test('renders content', () => {
 
   render(<Note note={note} />)
 
-  // screen.debug()
-  const element = screen.getByText('Component testing is done with react-testing-library')
-  // screen.debug(element)
+  // { exact: false } looks for element contains the text
+  const element = screen.getByText('Component testing is done with react-testing-library', { exact: false })
 
   expect(element).toBeDefined()
 })
 
-test.only('renders content', () => {
+test('renders content', () => {
   const note = {
     content: 'Does not work anymore :(',
     important: true
@@ -27,9 +26,22 @@ test.only('renders content', () => {
 
   render(<Note note={note} />)
 
+  // findByText return a promise, it does not cause an exception if the element is not found.
   const element = screen.findByText('Does not work anymore :(')
 
   expect(element).toBeDefined()
+})
+
+test('does not render this', () => {
+  const note = {
+    content: 'This is a reminder',
+    important: true
+  }
+
+  render(<Note note={note} />)
+
+  const element = screen.queryByText('do not want this thing to be rendered')
+  expect(element).toBeNull()
 })
 
 test('clicking the button calls event handler once', async () => {
