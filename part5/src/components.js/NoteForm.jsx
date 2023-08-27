@@ -2,6 +2,7 @@ import { useState } from 'react'
 
 const NoteForm = ({ createNote }) => {
   const [newNote, setNewNote] = useState('')
+  const [test, setTest] = useState('')
 
   const handleChange = (event) => setNewNote(event.target.value)
 
@@ -23,7 +24,12 @@ const NoteForm = ({ createNote }) => {
         <input
           value={newNote}
           onChange={handleChange}
+          placeholder='write note content here'
         />
+        {/* <input
+          value={test}
+          onChange={setTest}
+        /> */}
         <button type='submit'>save</button>
       </form>
     </div>
