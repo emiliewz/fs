@@ -16,9 +16,6 @@ const App = () => {
   const [errorMessage, setErrorMessage] = useState(null)
   const [user, setUser] = useState(null)
   const noteFormRef = useRef()
-  const togglable1 = useRef()
-  const togglable2 = useRef()
-  const togglable3 = useRef()
 
   useEffect(() => {
     noteService
@@ -103,20 +100,6 @@ const App = () => {
         <p>{user.name} logged in</p>
         {noteForm()}
       </div>}
-
-      <div>
-        <Togglable buttonLabel="1" ref={togglable1}>
-          first
-        </Togglable>
-
-        <Togglable buttonLabel="2" ref={togglable2}>
-          second
-        </Togglable>
-
-        <Togglable buttonLabel="3" ref={togglable3}>
-          third
-        </Togglable>
-      </div>
 
       <div>
         <button onClick={() => setShowAll(!showAll)}>
