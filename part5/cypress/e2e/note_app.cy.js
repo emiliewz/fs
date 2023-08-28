@@ -72,5 +72,22 @@ describe('Note app', () => {
           .contains('make important')
       })
     })
+
+    describe('and several notes exist', () => {
+      beforeEach(() => {
+        cy.createNote({ content: 'first note', importance: false })
+        cy.createNote({ content: 'second note', importance: false })
+        cy.createNote({ content: 'third note', importance: false })
+      })
+
+      it('one of those can be made important', () => {
+        cy.contains('second note')
+          .contains('make important')
+          .click()
+
+        cy.contains('second note')
+          .contains('make not important')
+      })
+    })
   })
 })
