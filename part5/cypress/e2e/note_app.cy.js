@@ -81,11 +81,10 @@ describe('Note app', () => {
       })
 
       it.only('one of those can be made important', () => {
-        cy.contains('second note')
-          .parent().find('button').click()
+        cy.contains('second note').parent().find('button').as('theButton')
 
-        cy.contains('second note')
-          .parent().should('contain', 'make not important')
+        cy.get('@theButton').click()
+        cy.get('@theButton').should('contain', 'make not important')
       })
     })
   })
