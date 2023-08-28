@@ -80,13 +80,12 @@ describe('Note app', () => {
         cy.createNote({ content: 'third note', importance: false })
       })
 
-      it('one of those can be made important', () => {
+      it.only('one of those can be made important', () => {
         cy.contains('second note')
-          .contains('make important')
-          .click()
+          .parent().find('button').click()
 
         cy.contains('second note')
-          .contains('make not important')
+          .parent().should('contain', 'make not important')
       })
     })
   })
