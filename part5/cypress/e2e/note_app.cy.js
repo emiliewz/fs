@@ -20,4 +20,21 @@ describe('Note app', () => {
 
     cy.contains('Matti Luukkainen logged in')
   })
+
+  describe('when logged in', () => {
+    beforeEach(() => {
+      cy.contains('log in').click()
+      cy.get('#username').type('user1')
+      cy.get('#password').type('user1pwd')
+      cy.get('#login-button').click()
+    })
+
+    it('a new note can be created', () => {
+      cy.contains('new note').click()
+      cy.get('#note-input').type('a note created by cypress')
+      cy.contains('save').click()
+      cy.contains('a note created by cypress')
+    })
+  })
+
 })
