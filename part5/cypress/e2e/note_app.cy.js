@@ -28,6 +28,22 @@ describe('Note app', () => {
     cy.contains('Matti Luukkainen logged in')
   })
 
+  it.only('login fails with wrong password', () => {
+    cy.contains('log in').click()
+    cy.get('#username').type('user1')
+    cy.get('#password').type('user1')
+    cy.get('#login-button').click()
+
+    // cy.get('.error').contains('Wrong credentials')
+    cy.get('.error').should('contain', 'Wrong credentials')
+      .and('have.css', 'color', 'rgb(255, 0, 0)')
+      .and('have.css', 'border-style', 'solid')
+    // cy.get('.error').should('have.css', 'color', 'rgb(255, 0, 0)')
+    // cy.get('.error').should('have.css', 'border-style', 'solid')
+
+    cy.get('html').should('not.contain', 'Matti Luukkainen logged in')
+  })
+
   describe('when logged in', () => {
     beforeEach(() => {
       cy.contains('log in').click()
