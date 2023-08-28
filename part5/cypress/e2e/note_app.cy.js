@@ -1,3 +1,4 @@
+
 describe('Note app', () => {
   beforeEach(() => {
     cy.request('POST', `${Cypress.env('BACKEND')}/testing/reset`)
@@ -8,6 +9,13 @@ describe('Note app', () => {
     }
     cy.request('POST', `${Cypress.env('BACKEND')}/users`, user)
     cy.visit('')
+  })
+
+  it('then example', function () {
+    cy.get('button').then(buttons => {
+      console.log('number of buttons', buttons.length)
+      cy.wrap(buttons[0]).click()
+    })
   })
 
   it('front page can be opened', () => {
@@ -66,9 +74,11 @@ describe('Note app', () => {
 
       it('it can be made not important', () => {
         cy.contains('another note cypress')
+          .parent().find('button')
           .contains('make not important')
           .click()
         cy.contains('another note cypress')
+          .parent()
           .contains('make important')
       })
     })
@@ -80,7 +90,7 @@ describe('Note app', () => {
         cy.createNote({ content: 'third note', importance: false })
       })
 
-      it.only('one of those can be made important', () => {
+      it('one of those can be made important', () => {
         cy.contains('second note').parent().find('button').as('theButton')
 
         cy.get('@theButton').click()
