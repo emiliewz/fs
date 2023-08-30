@@ -6,7 +6,7 @@ import { createStore } from 'redux'
 const noteReducer = (state = [], action) => {
   switch (action.type) {
     case 'NEW_NOTE':
-      return state.concat(action.payload)
+      return [...state, action.payload]
 
     case 'TOGGLE_IMPORTANCE': {
       const id = action.payload.id
