@@ -15,21 +15,29 @@ const App = () => {
     event.preventDefault()
     const content = event.target.note.value
     event.target.note.value = ''
-    store.dispatch({
+    store.dispatch(createNote(content))
+  }
+
+  const createNote = (content) => {
+    return {
       type: 'NEW_NOTE',
       payload: {
         content,
         important: false,
         id: generateId()
       }
-    })
+    }
+  }
+
+  const toggleImportanceOf = (id) => {
+    return {
+      type: 'TOGGLE_IMPORTANCE',
+      payload: { id }
+    }
   }
 
   const toggleImportance = (id) => {
-    store.dispatch({
-      type: 'TOGGLE_IMPORTANCE',
-      payload: { id }
-    })
+    store.dispatch(toggleImportanceOf(id))
   }
 
   return (
