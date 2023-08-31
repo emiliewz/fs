@@ -14,7 +14,7 @@ const createNew = async (content) => {
 }
 
 const updateImportance = async (id) => {
-  const objectToUpdate = await axios.get(`${baseUrl}/${id}`).then(response => response.data)
+  const objectToUpdate = await axios.get(`${baseUrl}/${id}`).data
   const updatedObject = { ...objectToUpdate, important: !objectToUpdate.important }
   const response = await axios.put(`${baseUrl}/${id}`, updatedObject)
   return response.data

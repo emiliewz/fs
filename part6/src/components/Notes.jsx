@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { toggleImportanceOf } from '../reducers/noteReducer'
-import noteService from '../services/note'
+import noteService from '../services/notes'
 
 const Note = ({ note, handleClick }) => {
   return (
