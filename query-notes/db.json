@@ -2,7 +2,7 @@
   "notes": [
     {
       "content": "the app state is in redux store",
-      "important": true,
+      "important": false,
       "id": 1
     },
     {
@@ -19,6 +19,116 @@
       "content": "qwesdqe2q",
       "important": true,
       "id": 4
+    },
+    {
+      "content": "addwa",
+      "important": false,
+      "id": 5
+    },
+    {
+      "content": "dwa",
+      "important": false,
+      "id": 6
+    },
+    {
+      "content": "dwadaw",
+      "important": false,
+      "id": 7
+    },
+    {
+      "content": "adwad",
+      "important": false,
+      "id": 8
+    },
+    {
+      "content": "adwad",
+      "important": true,
+      "id": 9
+    },
+    {
+      "content": "dwad",
+      "important": false,
+      "id": 10
+    },
+    {
+      "content": "awdad",
+      "important": true,
+      "id": 11
+    },
+    {
+      "content": "dwadaw",
+      "important": true,
+      "id": 12
+    },
+    {
+      "content": "adwad",
+      "important": true,
+      "id": 13
+    },
+    {
+      "content": "awdad",
+      "important": false,
+      "id": 14
+    },
+    {
+      "content": "dwadwa",
+      "important": true,
+      "id": 15
+    },
+    {
+      "content": "adwwad",
+      "important": true,
+      "id": 16
+    },
+    {
+      "content": "",
+      "important": true,
+      "id": 17
+    },
+    {
+      "content": "dawdawdawd",
+      "important": true,
+      "id": 18
+    },
+    {
+      "content": "dawdaw",
+      "important": true,
+      "id": 19
+    },
+    {
+      "content": "adwad",
+      "important": true,
+      "id": 20
+    },
+    {
+      "content": "dawdaw",
+      "important": true,
+      "id": 21
+    },
+    {
+      "content": "adwad",
+      "important": true,
+      "id": 22
+    },
+    {
+      "content": "",
+      "important": true,
+      "id": 23
+    },
+    {
+      "content": "dawd",
+      "important": true,
+      "id": 24
+    },
+    {
+      "content": "adwad",
+      "important": true,
+      "id": 25
+    },
+    {
+      "content": "",
+      "important": true,
+      "id": 26
     }
   ]
 }

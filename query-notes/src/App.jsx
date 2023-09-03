@@ -4,9 +4,19 @@ import { getNotes, createNote, updateNote } from './requests'
 const App = () => {
   const queryClient = useQueryClient()
 
-  const newNoteMutation = useMutation(createNote, {
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['notes'] })
+  const newNoteMutation = useMutation({
+    mutationFn: createNote,
+    onSuccess: (newNote) => {
+      const notes = queryClient.getQueryData({ queryKey: ['notes'] })
+      queryClient.setQueryData({ queryKey: ['notes'] }, notes.concat(newNote))
+    }
+  })
+
+  const updateNoteMutation = useMutation(updateNote, {
+    onSuccess: (returnedNote) => {
+      const notes = queryClient.getQueryData({ queryKey: ['notes'] })
+      queryClient.setQueryData({ queryKey: ['notes'] }, notes.map(n =>
+        n.id !== returnedNote.id ? n : returnedNote))
     }
   })
 
@@ -17,19 +27,14 @@ const App = () => {
     newNoteMutation.mutate({ content, important: true })
   }
 
-  const updateNoteMutation = useMutation(updateNote, {
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['notes'] })
-    }
-  })
-
   const toggleImportance = (note) => {
     updateNoteMutation.mutate({ ...note, important: !note.important })
   }
 
   const result = useQuery({
     queryKey: ['notes'],
-    queryFn: getNotes
+    queryFn: getNotes,
+    refetchOnWindowFocus: false
   })
   console.log(JSON.parse(JSON.stringify(result)))
 
