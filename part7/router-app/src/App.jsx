@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Routes, Route, Link, Navigate, useNavigate, useMatch } from 'react-router-dom'
-import { Container, TableBody, TableCell, Table, TableContainer, TableRow, Paper, TextField, Button, Alert } from '@mui/material'
+import { Container, TableBody, TableCell, Table, TableContainer, TableRow, Paper, TextField, Button, Alert, AppBar, Toolbar, IconButton } from '@mui/material'
 
 const Home = () => (
   <div>
@@ -127,15 +127,27 @@ const App = () => {
         </Alert>
       )}
 
-      <div>
-        <Link stype={padding} to='/'>home</Link>
-        <Link style={padding} to='/notes'>notes</Link>
-        <Link style={padding} to='/users'>users</Link>
-        {user
-          ? <em>{user} logged in</em>
-          : <Link style={padding} to={'/login'}>login</Link>
-        }
-      </div>
+      <AppBar position='static'>
+        <Toolbar>
+          <IconButton edge='start' color='inherit' aria-label='menu'>
+          </IconButton>
+          <Button color='inherit'>
+            <Link to='/'>home</Link>
+          </Button>
+          <Button color='inherit'>
+            <Link to='/notes'>notes</Link>
+          </Button>
+          <Button color='inherit'>
+            <Link to='/users'>users</Link>
+          </Button>
+          <Button color='inherit'>
+            {user
+              ? <em>{user} logged in</em>
+              : <Link to='/login'>login</Link>
+            }
+          </Button>
+        </Toolbar>
+      </AppBar>
 
       <Routes>
         <Route path='/notes/:id' element={<Note note={note} />} />
