@@ -45,12 +45,12 @@ const Users = () => (
   </div>
 )
 
-const Login = (props) => {
+const Login = ({ onLogin }) => {
   const navigate = useNavigate()
 
   const onSubmit = (event) => {
     event.preventDefault()
-    props.onLogin('mluukkai')
+    onLogin('mluukkai')
     navigate('/')
   }
 
