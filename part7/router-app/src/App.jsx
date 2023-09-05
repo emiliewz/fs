@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Routes, Route, Link, Navigate, useNavigate, useMatch } from 'react-router-dom'
-import { Container, TableBody, TableCell, Table, TableContainer, TableRow, Paper, TextField, Button } from '@mui/material'
+import { Container, TableBody, TableCell, Table, TableContainer, TableRow, Paper, TextField, Button, Alert } from '@mui/material'
 
 const Home = () => (
   <div>
@@ -103,8 +103,13 @@ const App = () => {
   ])
 
   const [user, setUser] = useState(null)
+  const [message, setMessage] = useState(null)
 
-  const login = (user) => setUser(user)
+  const login = (user) => {
+    setUser(user)
+    setMessage(`welcome ${user}`)
+    setTimeout(() => setMessage(null), 10000)
+  }
 
   const padding = { padding: 5 }
 
@@ -116,6 +121,12 @@ const App = () => {
 
   return (
     <Container>
+      {(message &&
+        <Alert severity='success'>
+          {message}
+        </Alert>
+      )}
+
       <div>
         <Link stype={padding} to='/'>home</Link>
         <Link style={padding} to='/notes'>notes</Link>
