@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Routes, Route, Link, Navigate, useNavigate, useMatch } from 'react-router-dom'
-import { Container, TableBody, TableCell, Table, TableContainer, TableRow, Paper } from '@mui/material'
+import { Container, TableBody, TableCell, Table, TableContainer, TableRow, Paper, TextField, Button } from '@mui/material'
 
 const Home = () => (
   <div>
@@ -65,12 +65,16 @@ const Login = ({ onLogin }) => {
       <h2>login</h2>
       <form onSubmit={onSubmit}>
         <div>
-          username: <input />
+          <TextField label='username' />
         </div>
         <div>
-          password: <input type='password' />
+          <TextField label='password' type='password' />
         </div>
-        <button type='submit'>login</button>
+        <div>
+          <Button variant='contained' color='primary' type='submit'>
+            login
+          </Button>
+        </div>
       </form>
     </div>
   )
