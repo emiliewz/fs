@@ -1,6 +1,36 @@
 import { useState } from 'react'
 import { Routes, Route, Link, Navigate, useNavigate, useMatch } from 'react-router-dom'
-import { Container, TableBody, TableCell, Table, TableContainer, TableRow, Paper, TextField, Button, Alert, AppBar, Toolbar, IconButton } from '@mui/material'
+
+import styled from 'styled-components'
+
+const Button = styled.button`
+  background: bisque;
+  font-size: 1em;
+  margin: 1em;
+  padding: 0.25em 1em;
+  border: 2px solid chocolate;
+  border-radius: 3px;
+`
+
+const Input = styled.input`
+  margin: 0.25em;
+`
+
+const Page = styled.div`
+  padding: 1em;
+  background: papayawhip;
+`
+
+const Navigation = styled.div`
+  background: BurlyWood;
+  padding: 1em;
+`
+
+const Footer = styled.div`
+  background: chocolate;
+  padding: 1em;
+  margin-top: 1em;
+`
 
 const Home = () => (
   <div>
@@ -20,23 +50,13 @@ const Note = ({ note }) => (
 const Notes = ({ notes }) => (
   <div>
     <h2>Notes</h2>
-
-    <TableContainer component={Paper}>
-      <Table>
-        <TableBody>
-          {notes.map(note => (
-            <TableRow key={note.id}>
-              <TableCell>
-                <Link to={`/notes/${note.id}`}>{note.content}</Link>
-              </TableCell>
-              <TableCell>
-                {note.user}
-              </TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
+    <ul>
+      {notes.map(note =>
+        <li key={note.id}>
+          <Link to={`/notes/${note.id}`}>{note.content}</Link>
+        </li>
+      )}
+    </ul>
   </div>
 )
 
@@ -65,16 +85,14 @@ const Login = ({ onLogin }) => {
       <h2>login</h2>
       <form onSubmit={onSubmit}>
         <div>
-          <TextField label='username' />
+          username:
+          <Input />
         </div>
         <div>
-          <TextField label='password' type='password' />
+          password:
+          <Input type='password' />
         </div>
-        <div>
-          <Button variant='contained' color='primary' type='submit'>
-            login
-          </Button>
-        </div>
+        <Button type='submit' primary=''>login</Button>
       </form>
     </div>
   )
@@ -103,13 +121,8 @@ const App = () => {
   ])
 
   const [user, setUser] = useState(null)
-  const [message, setMessage] = useState(null)
 
-  const login = (user) => {
-    setUser(user)
-    setMessage(`welcome ${user}`)
-    setTimeout(() => setMessage(null), 10000)
-  }
+  const login = (user) => setUser(user)
 
   const padding = { padding: 5 }
 
@@ -120,34 +133,16 @@ const App = () => {
     : null
 
   return (
-    <Container>
-      {(message &&
-        <Alert severity='success'>
-          {message}
-        </Alert>
-      )}
-
-      <AppBar position='static'>
-        <Toolbar>
-          <IconButton edge='start' color='inherit' aria-label='menu'>
-          </IconButton>
-          <Button color='inherit' component={Link} to='/'>
-            home
-          </Button>
-          <Button color='inherit' component={Link} to='/notes'>
-            notes
-          </Button>
-          <Button color='inherit' component={Link} to='/users'>
-            users
-          </Button>
-          {user
-            ? <em>{user} logged in</em>
-            : <Button color='inherit' component={Link} to='/login'>
-              login
-            </Button>
-          }
-        </Toolbar>
-      </AppBar>
+    <Page>
+      <Navigation>
+        <Link stype={padding} to='/'>home</Link>
+        <Link style={padding} to='/notes'>notes</Link>
+        <Link style={padding} to='/users'>users</Link>
+        {user
+          ? <em>{user} logged in</em>
+          : <Link style={padding} to={'/login'}>login</Link>
+        }
+      </Navigation>
 
       <Routes>
         <Route path='/notes/:id' element={<Note note={note} />} />
@@ -161,10 +156,10 @@ const App = () => {
         <Route path='/' element={<Home />} />
       </Routes>
 
-      <div>
+      <Footer>
         <em>Note app, Department of Computer Science 2023</em>
-      </div>
-    </Container>
+      </Footer>
+    </Page>
   )
 }
 
