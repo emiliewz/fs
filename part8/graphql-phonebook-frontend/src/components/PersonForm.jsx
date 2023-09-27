@@ -13,14 +13,22 @@ const PersonForm = ({ setError }) => {
     refetchQueries: [{ query: ALL_PERSONS }],
     onError: (error) => {
       const messages = error.graphQLErrors[0].message
-      setError(messages)
+      if (error.graphQLErrors[0].extensions.error) {
+        setError(error.graphQLErrors[0].extensions.error.message)
+      } else {
+        setError(messages)
+      }
     }
   })
 
-  const submit = (event) => {
+  const submit = async (event) => {
     event.preventDefault()
-
-    createPerson({ variables: { name, phone, street, city } })
+    createPerson({
+      variables: {
+        name, street, city,
+        phone: phone.length > 0 ? phone : undefined
+      }
+    })
 
     setName('')
     setPhone('')
