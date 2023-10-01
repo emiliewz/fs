@@ -12,7 +12,6 @@ const { useServer } = require('graphql-ws/lib/use/ws')
 const jwt = require('jsonwebtoken')
 
 const mongoose = require('mongoose')
-mongoose.set('strictQuery', false)
 
 const User = require('./models/user')
 
@@ -23,12 +22,13 @@ require('dotenv').config()
 
 const MONGODB_URI = process.env.MONGODB_URI
 
-console.log('connecting to', MONGODB_URI)
-
 mongoose
   .connect(MONGODB_URI)
-  .then(() => console.log('connected to MongoDB'))
+  .then(() => console.log('connected to', MONGODB_URI))
   .catch((error) => console.log('error connection to MongoDB:', error.message))
+
+mongoose.set('strictQuery', false)
+mongoose.set('debug', true)
 
 const start = async () => {
   const app = express()
