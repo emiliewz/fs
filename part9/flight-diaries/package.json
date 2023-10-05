@@ -1,12 +1,13 @@
 {
-  "name": "ilari's-flight-diaries",
+  "name": "flight-diaries",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "index.ts",
   "scripts": {
     "tsc": "tsc",
-    "dev": "ts-node-dev",
-    "lint": "eslint --ext .ts ."
+    "dev": "ts-node-dev index.ts",
+    "lint": "eslint --ext .ts .",
+    "start": "node build/index.js"
   },
   "keywords": [],
   "author": "",
