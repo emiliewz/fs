@@ -4,8 +4,8 @@ interface WelcomeProps {
   name: string;
 }
 
-const Welcome = ({ name }: { name: string }): JSX.Element => {
-  return <h1>Hello, {name}</h1>
+const Welcome = (props: WelcomeProps) => {
+  return <h1>Hello, {props.name}</h1>
 }
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
