@@ -1,4 +1,4 @@
-type Operation = 'multiply' | 'add' | 'divide';
+export type Operation = 'multiply' | 'add' | 'divide';
 
 export const calculator = (a: number, b: number, op: Operation): number => {
   switch(op) {
@@ -12,15 +12,15 @@ export const calculator = (a: number, b: number, op: Operation): number => {
     default:
       throw new Error('Operation is not multiply, add or divide!');
   }
-}
+};
 
-console.log(process.argv)
+console.log(process.argv);
 
 
 try {
   console.log(calculator(1, 5, 'divide'));
 } catch(error: unknown) {
-  let errorMessage = 'Something went wrong: '
+  let errorMessage = 'Something went wrong: ';
   // here we can not use error.message
   if (error instanceof Error) {
     // the type is narrowed and we can refer to error.message
@@ -28,5 +28,5 @@ try {
   }
   // here we can not use error.message
 
-  console.log(errorMessage)
+  console.log(errorMessage);
 }
