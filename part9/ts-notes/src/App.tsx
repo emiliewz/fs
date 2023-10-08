@@ -1,30 +1,22 @@
-import { useState,useEffect } from 'react';
-import axios from 'axios';
-
-interface Note {
-  id: number
-  content: string
-}
+import { useState,useEffect } from 'react'
+import { Note } from './types'
+import { getAllNotes, createNote } from './noteService'
 
 const App = () => {
-  const [notes, setNotes] = useState<Note[]>([
-    { id: 1, content: 'testing' }
-  ])
+  const [notes, setNotes] = useState<Note[]>([])
   const [newNote, setNewNote] = useState('')
 
   useEffect(() => {
-    axios.get<Note[]>('http://localhost:3001/notes').then(response => {
-      setNotes(response.data);
-      // setNotes(response.data as Note[])
+    getAllNotes().then(data => {
+      setNotes(data)
     })
   }, [])
 
   const noteCreation = (event: React.SyntheticEvent) => {
     event.preventDefault()
-    axios.post<Note>('http://localhost:3001/notes', { content: newNote })
-      .then(response => {
-        setNotes(notes.concat(response.data))
-      })
+    createNote({ content: newNote }).then(data => {
+      setNotes(notes.concat(data))
+    })
 
     setNewNote('')
   }
